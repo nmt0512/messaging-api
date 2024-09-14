@@ -1,4 +1,4 @@
-package com.thieunm.messaging_api.config;
+package com.thieunm.messaging_api.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

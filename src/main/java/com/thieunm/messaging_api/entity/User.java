@@ -1,8 +1,12 @@
 package com.thieunm.messaging_api.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.*;
 import org.hibernate.annotations.Nationalized;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDate;
 
@@ -14,9 +18,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class User extends JpaAuditable<Integer> {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @UuidGenerator
+    private String id;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -36,4 +41,7 @@ public class User extends JpaAuditable<Integer> {
 
     @Column
     private int role;
+
+    @Column
+    private int status;
 }
