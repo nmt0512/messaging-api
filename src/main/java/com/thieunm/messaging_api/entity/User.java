@@ -40,8 +40,8 @@ public class User extends JpaAuditable<Integer> {
     private LocalDate birthday;
 
     @Column
-    private int role;
+    private Integer role;
 
     @Column
-    private int status;
+    private Integer status;
 }

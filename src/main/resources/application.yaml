@@ -2,6 +2,13 @@ server:
   port: ${SERVER_PORT:8080}
   shutdown: graceful
 spring:
+  web:
+    cors:
+      allowed-origins:
+        - "http://localhost:3000"
+      allowed-methods: GET, POST, PUT, DELETE
+      allowed-headers: "*"
+      allow-credentials: true
   application:
     name: ${APP_NAME:messaging-api}
   profiles:
