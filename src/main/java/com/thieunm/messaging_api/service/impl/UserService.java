@@ -3,7 +3,6 @@ package com.thieunm.messaging_api.service.impl;
 import com.thieunm.messaging_api.dto.user.RegisterUserRequest;
 import com.thieunm.messaging_api.dto.user.UserResponse;
 import com.thieunm.messaging_api.entity.User;
-import com.thieunm.messaging_api.enums.RolesEnum;
 import com.thieunm.messaging_api.repository.IUserRepository;
 import com.thieunm.messaging_api.service.IUserService;
 import com.thieunm.messaging_api.utils.MapperUtils;
@@ -12,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.sql.Timestamp;
+import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -25,11 +27,15 @@ public class UserService implements IUserService {
     @Transactional
     public UserResponse registerUser(RegisterUserRequest request) {
         User user = MapperUtils.map(request, User.class);
+
         user.setPassword(passwordEncoder.encode(request.password()));
-        user.setRole(RolesEnum.USER.getCode());
+        user.setAdmin(false);
+        user.setOnline(true);
+        user.setLocked(false);
+        user.setLastOnlineTime(Timestamp.from(Instant.now()));
+
         user = userRepository.save(user);
-        UserResponse userResponse = MapperUtils.map(user, UserResponse.class);
-        userResponse.setRoleName(RolesEnum.USER.getName());
-        return userResponse;
+
+        return MapperUtils.map(user, UserResponse.class);
     }
 }

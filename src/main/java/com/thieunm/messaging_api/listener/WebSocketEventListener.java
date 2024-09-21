@@ -1,4 +1,4 @@
-package com.thieunm.messaging_api.config.socket;
+package com.thieunm.messaging_api.listener;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,12 +20,12 @@ public class WebSocketEventListener {
 
     @EventListener
     private void handleSessionConnected(SessionConnectedEvent event) {
-        log.info("Connected: {}", event.getMessage());
+        log.info("Session connected: {}", event.getMessage());
     }
 
     @EventListener
     private void handleSessionDisconnected(SessionDisconnectEvent event) {
-        log.info("Disconnected: {}", event.getMessage());
+        log.info("Session disconnected: {}", event.getMessage());
     }
 
 }

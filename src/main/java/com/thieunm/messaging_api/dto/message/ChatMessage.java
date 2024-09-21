@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ChatMessage {
     private String senderId;
-    private String receiverId;
-    private String message;
+    private String receivedUserId;
+    private String receivedGroupId;
+    private String messageBody;
 }

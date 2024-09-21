@@ -17,5 +17,7 @@ public class UserResponse {
     private String fullName;
     private Boolean gender;
     private LocalDate birthday;
-    private String roleName;
+    private boolean isAdmin;
+    private boolean isOnline;
+    private boolean isLocked;
 }

@@ -9,6 +9,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Getter
@@ -18,11 +19,11 @@ public abstract class JpaAuditable<U> {
 
     @CreatedDate
     @Column(name = "created_date", updatable = false)
-    private LocalDateTime createdDate;
+    private Timestamp createdDate;
 
     @LastModifiedDate
     @Column(name = "last_modified_date", insertable = false)
-    private LocalDateTime lastModifiedDate;
+    private Timestamp lastModifiedDate;
 
     @CreatedBy
     @Column(name = "created_by", updatable = false)

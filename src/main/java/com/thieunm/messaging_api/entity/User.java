@@ -1,14 +1,13 @@
 package com.thieunm.messaging_api.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Nationalized;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -17,7 +16,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User extends JpaAuditable<Integer> {
+public class User extends JpaAuditable<String> {
 
     @Id
     @UuidGenerator
@@ -30,7 +29,7 @@ public class User extends JpaAuditable<Integer> {
     private String password;
 
     @Nationalized
-    @Column(nullable = false)
+    @Column(name = "full_name", nullable = false)
     private String fullName;
 
     @Column
@@ -39,9 +38,30 @@ public class User extends JpaAuditable<Integer> {
     @Column
     private LocalDate birthday;
 
-    @Column
-    private Integer role;
+    @Column(name = "is_admin", nullable = false)
+    private boolean isAdmin;
 
-    @Column
-    private Integer status;
+    @Column(name = "is_online", nullable = false)
+    private boolean isOnline;
+
+    @Column(name = "is_locked", nullable = false)
+    private boolean isLocked;
+
+    @Column(name = "last_online_time", nullable = false)
+    private Timestamp lastOnlineTime;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserGroup> userGroupList;
+
+    @OneToMany(mappedBy = "sender")
+    private List<Message> sentMessageList;
+
+    @OneToMany(mappedBy = "receivedUser")
+    private List<MessageReceiver> receivedMessageList;
+
+    @OneToMany(mappedBy = "user")
+    private List<Contact> contactList;
+
+    @OneToMany(mappedBy = "friend")
+    private List<Contact> addedToFriendContactList;
 }

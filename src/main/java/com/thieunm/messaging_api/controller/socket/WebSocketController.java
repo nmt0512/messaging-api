@@ -18,11 +18,11 @@ public class WebSocketController {
 
     @MessageMapping("/private-message")
     public void sendPrivateMessage(@Payload ChatMessage chatMessage) {
-        log.info(JsonUtils.parseObjectToJson(chatMessage));
+        log.info("Private message: {}", JsonUtils.parseObjectToJson(chatMessage));
         messagingTemplate.convertAndSendToUser(
-                chatMessage.getReceiverId(),
+                chatMessage.getReceivedUserId(),
                 "/queue/messages",
-                chatMessage.getMessage()
+                chatMessage.getMessageBody()
         );
     }
 }
